@@ -15,7 +15,7 @@ If you require packages not installed in the above environment, add them to temp
 
 ## Using this script
 
-1.  Modify the example to match your needs. First modify the list of families you're searching for (line 126). Then modify the search pattern you're looking for in the protein name (line 149).
+1.  Modify the example to match your needs. First modify the list of families you're searching for [line 126](https://github.com/hhollandmoritz/cazyme_scraper/blob/f49741f419afd7fdc23ae93cca21ff7ef96d9ee2/cazyme_scraper.R#L126). Then modify the search pattern you're looking for in the protein name [line 149](https://github.com/hhollandmoritz/cazyme_scraper/blob/f49741f419afd7fdc23ae93cca21ff7ef96d9ee2/cazyme_scraper.R#L149).
 2.  Optional, modify the output directory and the write_output option to determine if the script will create a table or just an R-object.
 3.  Activate the conda environment as above and run the script.
 
