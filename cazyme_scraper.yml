@@ -1,0 +1,16 @@
+name: cazyme_scraper_v0.1
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python>=3.6
+  - r-base>=4.1.0
+  - r-essentials
+  - r-here
+  - r-devtools
+  - r-janitor
+  - r-xml
+  - r-Rcurl
+  - r-rvest
+  - r-rlist
