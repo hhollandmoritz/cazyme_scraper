@@ -127,7 +127,7 @@ Families <- c("GH18","GH19","GH23","GH73","GH20","GH84","CE4") # chitin families
 
 outdir <- "" # output directory, if blank, will create output in location of script
 
-scrape_char_chitin_cazy <- function(FamilyNames = Families,
+scrape_char_family_cazy <- function(FamilyNames = Families,
                                     write_output = TRUE,
                                     output_dir = outdir) {
   
@@ -144,16 +144,15 @@ scrape_char_chitin_cazy <- function(FamilyNames = Families,
   
   
   # Reduce the list to one dataframe
-  chitin_char <- purrr::reduce(cazy_char_list, bind_rows) %>%
-    filter(Taxonomy %in% c("Bacteria", "Archaea", "Viruses")) %>%
-    filter(grepl("[Cc]hi", `Protein Name`)) # searching for 'chi' pattern in names
+  family_char <- purrr::reduce(cazy_char_list, bind_rows) %>%
+    filter(Taxonomy %in% c("Bacteria", "Archaea", "Viruses"))
   
   if(write_output) {
     # Write a table
-    write_tsv(chitin_char, file = here(outdir,"characterized_chitinases.txt"))
+    write_tsv(family_char, file = here(outdir,"characterized_chitinases.txt"))
   }
   
-  return(chitin_char)
+  return(family_char)
 }
 
-scrape_char_chitin_cazy()
+scrape_char_family_cazy()
