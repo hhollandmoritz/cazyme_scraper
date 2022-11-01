@@ -1,0 +1,149 @@
+---
+title: "Cazyme screening"
+author: "Samuel Aroney"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  bookdown::pdf_document2:
+    toc: FALSE
+  bookdown::html_document2: default
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(here)
+source(here("cazyme_scraper.R"))
+```
+
+```{r screening}
+#######################
+### Alpha_galactans ###
+#######################
+Alpha_galactans <- scrape_char_family_cazy(FamilyNames = c("GH166", "GH110"), write_output = FALSE)
+pattern <- "α.*galactosidase|acetylgalactosaminidase"
+Alpha_galactans %>% mutate(Alpha_galactans = map_lgl(`Protein Name`, ~ str_detect(., pattern))) %>% group_by(FamilyName) %>% summarise(prop = sum(Alpha_galactans) / n())
+
+####################
+### Alpha_mannan ###
+####################
+Alpha_mannan <- scrape_char_family_cazy(FamilyNames = c("GH99", "GH76", "GH92", "GH38", "GH63", "GH47", "GH125"), write_output = FALSE)
+pattern <- "mannosidase|mannanase|mannosylglycerate"
+Alpha_mannan %>% mutate(Alpha_mannan = map_lgl(`Protein Name`, ~ str_detect(., pattern))) %>% group_by(FamilyName) %>% summarise(prop = sum(Alpha_mannan) / n())
+
+###########################
+### Amorphous_Cellulose ###
+###########################
+Amorphous_Cellulose <- scrape_char_family_cazy(FamilyNames = c("GH6", "GH124", "GH94"), write_output = FALSE)
+pattern <- "cellulase|glucanase|cello"
+Amorphous_Cellulose %>% mutate(Amorphous_Cellulose = map_lgl(`Protein Name`, ~ str_detect(., pattern))) %>% group_by(FamilyName) %>% summarise(prop = sum(Amorphous_Cellulose) / n())
+
+################
+### Arabinan ###
+################
+Arabinan <- scrape_char_family_cazy(FamilyNames = c("GH49", "GH93", "GH51"), write_output = FALSE)
+pattern <- "arabinanase|arabino"
+Arabinan %>% mutate(Arabinan = map_lgl(`Protein Name`, ~ str_detect(., pattern))) %>% group_by(FamilyName) %>% summarise(prop = sum(Arabinan) / n())
+
+##########################
+### Arabinose_cleavage ###
+##########################
+Arabinose_cleavage <- scrape_char_family_cazy(FamilyNames = c("GH121", "GH127", "GH137", "GH142", "GH146"), write_output = FALSE)
+pattern <- "arabino"
+Arabinose_cleavage %>% mutate(Arabinose_cleavage = map_lgl(`Protein Name`, ~ str_detect(., pattern))) %>% group_by(FamilyName) %>% summarise(prop = sum(Arabinose_cleavage) / n())
+
+#######################################
+### Beta_galactan__pectic_galactan_ ###
+#######################################
+Beta_galactan__pectic_galactan_ <- scrape_char_family_cazy(FamilyNames = c("GH53", "GH35", "GH42", "GH59", "GH147", "GH165"), write_output = FALSE)
+pattern <- "galactosidase|galactanase"
+Beta_galactan__pectic_galactan_ %>% mutate(Beta_galactan__pectic_galactan_ = map_lgl(`Protein Name`, ~ str_detect(., pattern))) %>% group_by(FamilyName) %>% summarise(prop = sum(Beta_galactan__pectic_galactan_) / n())
+
+###################
+### Beta_mannan ###
+###################
+Beta_mannan <- scrape_char_family_cazy(FamilyNames = c("GH113", "GH134", "CE2", "CE17"), write_output = FALSE)
+pattern <- "mannanase|mannan-esterase|mannosidase"
+Beta_mannan %>% mutate(Beta_mannan = map_lgl(`Protein Name`, ~ str_detect(., pattern))) %>% group_by(FamilyName) %>% summarise(prop = sum(Beta_mannan) / n())
+
+##############
+### Chitin ###
+##############
+Chitin <- scrape_char_family_cazy(FamilyNames = c("GH18", "GH19", "GH23", "GH73", "GH20", "GH84", "CE4"), write_output = FALSE)
+pattern <- "[Cc]hi|N-acetylhexosaminidase|N-acetylglucosaminidase|N-acetylglucosamidase|N-acetylglucosamine|N-acetyl-glucosaminidase|N-acetyl-D-glucosamine|N-acetyl β-glucosaminidase|endo-N-glycosidase"
+Chitin %>% mutate(Chitin = map_lgl(`Protein Name`, ~ str_detect(., pattern))) %>% group_by(FamilyName) %>% summarise(prop = sum(Chitin) / n())
+
+#############################
+### Crystalline_Cellulose ###
+#############################
+Crystalline_Cellulose <- scrape_char_family_cazy(FamilyNames = c("AA16"), write_output = FALSE)
+# All characterised proteins are Eukaryotic
+
+#######################
+### Fucose_Cleavage ###
+#######################
+Fucose_Cleavage <- scrape_char_family_cazy(FamilyNames = c("GH107", "GH151", "GH29", "GH95"), write_output = FALSE)
+pattern <- "fucanase|fucoidan|fucosidase"
+Fucose_Cleavage %>% mutate(Fucose_Cleavage = map_lgl(`Protein Name`, ~ str_detect(., pattern))) %>% group_by(FamilyName) %>% summarise(prop = sum(Fucose_Cleavage) / n())
+
+#############################
+### Mixed_Linkage_glucans ###
+#############################
+Mixed_Linkage_glucans <- scrape_char_family_cazy(FamilyNames = c("GH17", "GH55", "GH64", "GH81", "GH128", "GH152", "GH157", "GH158"), write_output = FALSE)
+pattern <- "glucanase|laminarin|glucanosyltransglucosidase"
+Mixed_Linkage_glucans %>% mutate(Mixed_Linkage_glucans = map_lgl(`Protein Name`, ~ str_detect(., pattern))) %>% group_by(FamilyName) %>% summarise(prop = sum(Mixed_Linkage_glucans) / n())
+
+#############
+### Mucin ###
+#############
+Mucin <- scrape_char_family_cazy(FamilyNames = c("GH101", "GH129", "GH112", "GH109"), write_output = FALSE)
+pattern <- "acetylgalactosaminidase|phosphorylase"
+Mucin %>% mutate(Mucin = map_lgl(`Protein Name`, ~ str_detect(., pattern))) %>% group_by(FamilyName) %>% summarise(prop = sum(Mucin) / n())
+
+##############
+### Pectin ###
+##############
+Pectin <- scrape_char_family_cazy(FamilyNames = c("PL1", "PL2", "PL9", "PL10", "PL11", "PL22", "PL26", "PL3", "PL4", "GH138", "GH143", "CE8", "GH105", "CE12"), write_output = FALSE)
+pattern <- "pectin|pectate|rhamnogalacturo|oligogalacturonate|polygalacturonate|acetylgalactosaminuric|2-keto-3-deoxy-D-lyxo-heptulosaric"
+Pectin %>% mutate(Pectin = map_lgl(`Protein Name`, ~ str_detect(., pattern))) %>% group_by(FamilyName) %>% summarise(prop = sum(Pectin) / n())
+
+#####################
+### Polyphenolics ###
+#####################
+Polyphenolics <- scrape_char_family_cazy(FamilyNames = c("AA1", "AA2"), write_output = FALSE)
+# All characterised proteins are Eukaryotic
+
+#########################
+### Rhamnose_cleavage ###
+#########################
+Rhamnose_cleavage <- scrape_char_family_cazy(FamilyNames = c("PL27", "PL28"), write_output = FALSE)
+pattern <- "rhamnose|ulvan"
+Rhamnose_cleavage %>% mutate(Rhamnose_cleavage = map_lgl(`Protein Name`, ~ str_detect(., pattern))) %>% group_by(FamilyName) %>% summarise(prop = sum(Rhamnose_cleavage) / n())
+# GH145 no longer exists => PL42
+
+##############
+### Starch ###
+##############
+Starch <- scrape_char_family_cazy(FamilyNames = c("GH13", "GH14", "GH57", "GH119", "GH126", "GH133", "GH15"), write_output = FALSE)
+pattern <- "amylase|amylo|glucanotransferas"
+Starch %>% mutate(Starch = map_lgl(`Protein Name`, ~ str_detect(., pattern))) %>% group_by(FamilyName) %>% summarise(prop = sum(Starch) / n())
+
+############################
+### Sulf_Polysaccharides ###
+############################
+Sulf_Polysaccharides <- scrape_char_family_cazy(FamilyNames = c("GH111", "GH82", "GH150", "GH79", "PL29", "PL30", "PL33", "PL8", "PL12", "PL13", "PL15", "PL21", "PL6", "PL37", "GH56", "GH86", "PL23", "GH88", "GH117"), write_output = FALSE)
+pattern <- "alginate|heparin|heparanase|[Cc]hondroitin|carrageenase|keratan|porphyran|agar"
+Sulf_Polysaccharides %>% mutate(Sulf_Polysaccharides = map_lgl(`Protein Name`, ~ str_detect(., pattern))) %>% group_by(FamilyName) %>% summarise(prop = sum(Sulf_Polysaccharides) / n())
+
+##############
+### Xylans ###
+##############
+Xylans <- scrape_char_family_cazy(FamilyNames = c("GH11", "GH98", "GH39", "GH52", "GH120", "GH115", "GH67"), write_output = FALSE)
+pattern <- "xylan|xylosidase|Xyl"
+Xylans %>% mutate(Xylans = map_lgl(`Protein Name`, ~ str_detect(., pattern))) %>% group_by(FamilyName) %>% summarise(prop = sum(Xylans) / n())
+
+##################
+### Xyloglucan ###
+##################
+Xyloglucan <- scrape_char_family_cazy(FamilyNames = c("GH74"), write_output = FALSE)
+pattern <- "xyloglucan"
+Xyloglucan %>% mutate(Xyloglucan = map_lgl(`Protein Name`, ~ str_detect(., pattern))) %>% group_by(FamilyName) %>% summarise(prop = sum(Xyloglucan) / n())
+```
